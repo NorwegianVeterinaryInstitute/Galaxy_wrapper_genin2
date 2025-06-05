@@ -59,16 +59,26 @@ conda build meta.yaml
 # It prefers a path and numpy needs to be specified manually otherwise it wont take it 
 conda build .  --numpy 2.2.6
 conda build purge # removes the attempt at build that did not work
-conda deactivate
+
 ```
 # using the build to create the conda environment
+
+#tmux on login 4
 
 copy the yml file
 ```bash
 cd  /cluster/projects/nn9305k/src/miniconda/yaml_files
-ls /cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe/genini2.yml
-cp /cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe/genini2.yml .
-conda env create -f genini2.yml
+ls /cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe/
+cp /cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe/genin2_2.1.2.yml  .
+
+# If index is not found - but can try without
+GENIN_BUILD_PATH="/cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe"
+#"/cluster/projects/nn9305k/src/miniconda/envs/conda-build/conda-bld" -> where it did put the stuff for building
+# cache for packages :  /cluster/projects/nn9305k/src/miniconda/pkgs/cache/
+conda-build index $GENIN_BUILD_PATH
+
+conda env create -f genin2_2.1.2.yml -c $GENIN_BUILD_PATH
+conda deactivate
 ```
 
 # genin options to implement for VIGAS-O
