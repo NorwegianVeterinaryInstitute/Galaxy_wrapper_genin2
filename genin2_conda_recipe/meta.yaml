@@ -15,33 +15,33 @@ build:
   entry_points:
     # genin2 provides a console script, pip install handles this automatically.
     # If needed, you can list them here for conda to be aware:
-    # - genin2 = genin2.genin2:main
+    - genin2 = genin2.genin2:main
 
 requirements:
   host: # Dependencies needed at build time
     - python >=3.13
     - pip
     - setuptools
-    - genin2==2.1.2
+    # - genin2==2.1.2
 
 
   run: # Dependencies needed at run time
     - python >=3.13
-    - biopython==1.85
-    - certifi==2025.4.26
-    - charset-normalizer==3.4.2
-    - click==8.2.1
-    - docopt==0.6.2
-    - idna==3.10
-    - importlib_resources==6.5.2
-    - joblib==1.5.1
-    - numpy==2.2.6
-    - requests==2.32.3
-    - scikit-learn==1.6.1
-    - scipy==1.15.3
-    - threadpoolctl==3.6.0
-    - urllib3==2.4.0
-    - yarg==0.1.10
+    - biopython ==1.85
+    - certifi ==2025.4.26
+    - charset-normalizer ==3.4.2
+    - click ==8.2.1
+    - docopt ==0.6.2
+    - idna ==3.10
+    - importlib_resources ==6.5.2
+    - joblib ==1.5.1
+    - numpy ==2.2.6
+    - requests ==2.32.3
+    - scikit-learn ==1.6.1
+    - scipy ==1.15.3
+    - threadpoolctl ==3.6.0
+    - urllib3 ==2.4.0
+    - yarg ==0.1.10
     
 test:
   imports: # Test by trying to import the package
@@ -51,7 +51,7 @@ test:
 
 about:
   home: https://github.com/izsvenezie-virology/genin2
-  license: MIT
+  license: GNU Affero General Public License v3.0
   license_file: LICENSE # The sdist from PyPI includes this file
   summary: 'GenInI: GENbank INput INIhibitor for an easy and standardized submission of FASTA and metadata to GISAID and GenBank'
   doc_url: https://github.com/izsvenezie-virology/genin2
@@ -59,4 +59,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - your-github-username # Optional: add your GitHub username
+    - evezeyl
