@@ -63,7 +63,7 @@ conda build purge # removes the attempt at build that did not work
 ```
 # using the build to create the conda environment
 
-#tmux on login 4
+
 
 copy the yml file
 ```bash
@@ -71,16 +71,25 @@ cd  /cluster/projects/nn9305k/src/miniconda/yaml_files
 ls /cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe/
 cp /cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe/genin2_2.1.2.yml  .
 
-# If index is not found - but can try without
+# If index is not found - but can try without (it seems it had been done)
 GENIN_BUILD_PATH="/cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe"
 #"/cluster/projects/nn9305k/src/miniconda/envs/conda-build/conda-bld" -> where it did put the stuff for building
 # cache for packages :  /cluster/projects/nn9305k/src/miniconda/pkgs/cache/
 conda-build index $GENIN_BUILD_PATH
 
-conda env create -f genin2_2.1.2.yml -c $GENIN_BUILD_PATH
+conda env create -f genin2_2.1.2.yml 
+# conda env create -f genin2_2.1.2.yml -c $GENIN_BUILD_PATH - if need to specify the path
+
+conda activate genin2_2.1.2
+cd test
+genin2 -o test.tsv EPI_ISL_18933204.fasta
+
+
 conda deactivate
 ```
 
+
+#tmux on login 4
 # genin options to implement for VIGAS-O
 
 available options
