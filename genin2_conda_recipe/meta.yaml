@@ -41,7 +41,7 @@ requirements:
     - scipy ==1.15.3
     - threadpoolctl ==3.6.0
     - urllib3 ==2.4.0
-    - yarg ==0.1.10
+    - yarg >=0.1.9 #0.1.10 - but is not yet in conda forge
     
 test:
   imports: # Test by trying to import the package
