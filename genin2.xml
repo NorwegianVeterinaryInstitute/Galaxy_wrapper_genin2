@@ -1,14 +1,12 @@
-<tool id=genin2_2.1.2" name="genin2_2.1.2" version="2.1.2+galaxy1">
-    <description>
-        Genin2 predict genotypes for Influenza viruses beloning to the clade 2.3.4.4b H5Nx. For viruses collected in Europe since October 2020. 
-        This software is developped by the EURL.
-    </description>
+<tool id= genin2_2.1.2" name=" genin2_2.1.2" version=" 2.1.2+galaxy1">
+    <description>Genin2 predict genotypes for Influenza viruses beloning to the clade 2.3.4.4b H5Nx. For viruses collected in Europe since October 2020. 
+        This software is developped by the EURL.</description>
     <macros>
         <import>macros.xml</import>
     </macros>
 
     <requirements>
-	    <requirement type="package" version="2.1.2">genin2</requirement>
+	    <requirement type=" package" version=" 2.1.2">genin2</requirement>
     </requirements>
 
     <command>
@@ -16,14 +14,19 @@
             mkdir output_dir &&
             <!-- Example: genin2 -o test.tsv EPI_ISL_18933204.fasta -->
             genin2 genin2 -o $output $formated_assembly
+            python -m genin2 -o ./output.tsv $formated_fasta  
         ]]>
     </command>
+
+    </inputs>
     </inputs>
 
 
+
+
     <outputs>
-        <!--datatype extension="tsv" type="galaxy.datatypes.tabular:TSV"-->
-        <data format="tabular" name="output1" from_work_dir="genin2_results.tsv" label="genin2 results" />
+        <!--datatype extension=" tsv" type=" galaxy.datatypes.tabular:TSV"-->
+        <data format=" tabular" name=" output1" from_work_dir=" genin2_results.tsv" label=" genin2 results" />
     </outputs>
     <help>
         <![CDATA[
@@ -49,7 +52,7 @@
     </help>
 
     <citations>
-        <citation type="doi">10.1093/ve/veae027</citation>
-	<citation type="doi">doi.org/10.1093/ve/veae027</citation>
+        <citation type=" doi">10.1093/ve/veae027</citation>
+	<citation type=" doi">doi.org/10.1093/ve/veae027</citation>
     </citations>
 </tool>
