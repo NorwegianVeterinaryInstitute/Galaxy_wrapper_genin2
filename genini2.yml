@@ -1,0 +1,13 @@
+# using conda-build on meta.yaml then building with this file
+name: genin2_2.1.2
+channels:
+ - local
+ - conda-forge
+ - bioconda
+ - defaults
+dependencies:
+ - python=3.13 
+ - genin2=2.1.2
+ 
+
+

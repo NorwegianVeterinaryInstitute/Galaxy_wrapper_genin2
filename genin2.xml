@@ -1,0 +1,55 @@
+<tool id=genin2_2.1.2" name="genin2_2.1.2" version="2.1.2+galaxy1">
+    <description>
+        Genin2 predict genotypes for Influenza viruses beloning to the clade 2.3.4.4b H5Nx. For viruses collected in Europe since October 2020. 
+        This software is developped by the EURL.
+    </description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+
+    <requirements>
+	    <requirement type="package" version="2.1.2">genin2</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+            mkdir output_dir &&
+            <!-- Example: genin2 -o test.tsv EPI_ISL_18933204.fasta -->
+            genin2 genin2 -o $output $formated_assembly
+        ]]>
+    </command>
+    </inputs>
+
+
+    <outputs>
+        <!--datatype extension="tsv" type="galaxy.datatypes.tabular:TSV"-->
+        <data format="tabular" name="output1" from_work_dir="genin2_results.tsv" label="genin2 results" />
+    </outputs>
+    <help>
+        <![CDATA[
+        **What it does**
+        Predicts genotypes for Influenza viruses beloning to the clade 2.3.4.4b H5Nx. 
+        For viruses collected in Europe since October 2020.
+
+        This software is developped by the EURL.
+        <!-- FIXME
+        Genin2 Repostiory <https://github.com/izsvenezie-virology/genin2>
+
+        Citation: 
+        Fusaro, Alice, Bianca Zecchin, Edoardo Giussani, Elisa Palumbo, Montserrat Agüero-García, Claudia Bachofen, Ádám Bálint, et al. ‘High Pathogenic Avian Influenza A(H5) Viruses of Clade 2.3.4.4b in Europe—Why Trends of Virus Evolution Are More Difficult to Predict’. Virus Evolution 10, no. 1 (17 October 2024): veae027. https://doi.org/10.1093/ve/veae027.
+
+        **License**
+        To be added
+
+        ** Acknowledgments **
+        To be added
+        -->  
+
+        ]]>
+    </help>
+
+    <citations>
+        <citation type="doi">10.1093/ve/veae027</citation>
+	<citation type="doi">doi.org/10.1093/ve/veae027</citation>
+    </citations>
+</tool>
