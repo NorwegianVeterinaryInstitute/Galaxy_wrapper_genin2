@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2a8833966003750d5534451f00887687737810693721e253871403929106391a
+  sha256: 428952edbad1686c4995b01cd0093d5f712f6d45edbf3e70b49c33b0a17c9c26
 
 build:
   number: 0
@@ -15,14 +15,13 @@ build:
   entry_points:
     # genin2 provides a console script, pip install handles this automatically.
     # If needed, you can list them here for conda to be aware:
-    - genin2 = genin2.genin2:main
+    - genin2 = genin2.cli:start_cli
 
 requirements:
   host: # Dependencies needed at build time
     - python >=3.13
     - pip
     - setuptools
-    # - genin2==2.1.2
 
 
   run: # Dependencies needed at run time
@@ -41,7 +40,8 @@ requirements:
     - scipy ==1.15.3
     - threadpoolctl ==3.6.0
     - urllib3 ==2.4.0
-    - yarg >=0.1.9 #0.1.10 - but is not yet in conda forge
+    #0.1.10 - but is not yet in conda forge
+    - yarg >=0.1.9
     
 test:
   imports: # Test by trying to import the package

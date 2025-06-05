@@ -18,7 +18,8 @@ pip freeze > requirements.txt
 conda deactivate
 ```
 
-- added the requirements to conda recipie
+- added the requirements to conda recipie'
+needed to ajust some requirements because one was not yet in conda forge
 
 # creating the conda build environemnt
 
@@ -27,23 +28,53 @@ conda create -n conda-build -c anaconda conda-build
 ``` 
 
 # Creating the meta.yaml file to create the conda package
-see `meta.yanl`
+see `meta.yaml`
+
+- I need to get the package from PyPy and get the checksum
+- then I need to put this checksum in the recipie
+
+```bash
+wget https://pypi.io/packages/source/g/genin2/genin2-2.1.2.tar.gz
+sha256sum genin2-2.1.2.tar.gz
+``` 
+
+Error in build - we need to force conda to reload the packages
+```bash
+conda clean --packages
+ls -la /cluster/projects/nn9305k/src/miniconda/pkgs/libgfortran-ng-15.1.0-h69a702a_2.conda
+rm /cluster/projects/nn9305k/src/miniconda/pkgs/libgfortran-ng-15.1.0-h69a702a_2.conda
+ls -la /cluster/projects/nn9305k/src/miniconda/pkgs/n* | grep "numpy-2.2.6" 
+# rm /cluster/projects/nn9305k/src/miniconda/pkgs/numpy-2.2.6-py313h17eae1a_0.conda
+```
+
 
 # build the conda package
 ```bash
 cd /cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe
 conda activate conda-build
 conda build meta.yaml
+
+# conda build meta.yaml  --config-file conda_build_config.yaml # it does not want to take numpy from this version
+# conda build meta.yaml  --numpy 2.2.6
+# It prefers a path and numpy needs to be specified manually otherwise it wont take it 
+conda build .  --numpy 2.2.6
+conda build purge # removes the attempt at build that did not work
 conda deactivate
 ```
-
 # using the build to create the conda environment
+
+copy the yml file
 ```bash
-conda env create -f /cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genini2.yml
+cd  /cluster/projects/nn9305k/src/miniconda/yaml_files
+ls /cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe/genini2.yml
+cp /cluster/projects/nn9305k/active/evezeyl/VIGAS-P/Galaxy_wrapper_genin2/genin2_conda_recipe/genini2.yml .
+conda env create -f genini2.yml
 ```
 
-# genin options to implement
+# genin options to implement for VIGAS-O
 
+available options
+```bash
 genin2 [OPTIONS] INPUT_FILE
 
   -h, --help                    Show this message and exit.
@@ -53,3 +84,7 @@ genin2 [OPTIONS] INPUT_FILE
                                 wrn]
   --min-seq-cov FLOAT RANGE     The minimum accepted sequence coverage for
                                 each gene segment  [default: 0.7; 0<=x<=1]
+```
+
+- o --output-file
+--min-seq-cov FLOAT RANGE

@@ -1,3 +1,64 @@
+# conda_build_config.yaml
+
+# Python versions to build for
+# python:
+#   - 3.9   # [py39]
+#   - 3.10  # [py310]
+
+# NumPy versions to build against
 numpy:
-  - "2.2.6"
+  - 2.2.6
+
+
+# Other dependencies with specific versions
+# openssl:
+#   - 1.1.1
+#   - 3.0
+
+# You can also define custom variables
+# that can be used in your meta.yaml
+channel_sources:
+  - bioconda,conda-forge,defaults
+ 
+
+# Example of setting different compilers for different Python versions
+# This is more advanced and often handled by conda-forge's global config,
+# but demonstrates capability.
+# c_compiler:
+#   - gcc        # [linux]
+#   - clang      # [osx]
+#   - vs2019     # [win]
+
+# You can also specify target platforms
+# target_platform:
+#  - linux-64
+#  - osx-arm64
+#  - win-64
+
+# Pinning runtime dependencies
+# This ensures that packages built with this config
+# will require a specific version (or range) of a dependency at runtime.
+# For example, to pin packages built with numpy 1.22 to run with numpy 1.22.x
+# pin_run_as_build:
+#   python:
+#     min_pin: x.x
+#     max_pin: x.x
+#   numpy:
+#     min_pin: x.x
+#     max_pin: x.x
+#   openssl:
+#     max_pin: x.x.x # Pins to the major.minor.patch version used at build time
+
+# Example of using zip_keys to build combinations
+# zip_keys:
+#  - python
+#  - numpy # This would create builds for (py39, np1.22), (py310, np1.23) etc. if versions align.
+#          # More commonly, you'd ensure the lists are the same length or use selectors
+#          # to control which combinations are built.
+
+# Example of variant specific settings
+# my_custom_feature:
+#  - True
+#  - False
+
           
