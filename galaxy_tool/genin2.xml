@@ -86,12 +86,12 @@
 
     <tests>
         <test expect_num_outputs="1">
-            <param name="input_file" value="test_input.txt"/>
+            <param name="input_file" value="test_input.fasta"/>
             <param name="specify_cov" value="no"/>
             <output name="output_file" file="test_output_default.tsv" />
         </test>
         <test expect_num_outputs="1">
-            <param name="input_file" value="test_input.txt"/>
+            <param name="input_file" value="test_input.fasta"/>
             <param name="specify_cov" value="yes"/>
             <param name="min_seq_cov" value="0.6"/> 
             <output name="output_file" file="test_output_mincov.tsv" />
