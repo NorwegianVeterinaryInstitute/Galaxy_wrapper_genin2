@@ -1,4 +1,5 @@
-<tool id= genin2_2.1.2" name=" genin2_2.1.2" version=" 2.1.2+galaxy1">
+<tool id="genin2_2.1.2" name="genin2_2.1.2" version="2.1.2+galaxy1">
+
     <description>Genin2 predict genotypes for Influenza viruses beloning to the clade 2.3.4.4b H5Nx. For viruses collected in Europe since October 2020. 
         This software is developped by the EURL.</description>
     <macros>
@@ -6,7 +7,7 @@
     </macros>
 
     <requirements>
-	    <requirement type=" package" version=" 2.1.2">genin2</requirement>
+	    <requirement type=" package" version="2.1.2">genin2</requirement>
     </requirements>
 
     <command>

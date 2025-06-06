@@ -1,0 +1,36 @@
+<tool id="genin2" name="genin2" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" python_template_version="3.5" profile="21.05">
+<!-- FIXME galaxy version 21.09-->
+   <description>Genin2 predict genotypes for Influenza viruses beloning to the clade 2.3.4.4b H5Nx. For viruses collected in Europe since October 2020. 
+        This software is developped by the EURL.</description>
+
+    <macros>
+        <xml name="bio_tools">
+            <xrefs>
+                <xref type="bio.tools">genin2</xref>
+            </xrefs>
+        </xml>
+    
+        <token name="@TOOL_VERSION@">2.1.2</token>
+        <token name="@VERSION_SUFFIX@">1</token>
+    </macros>
+
+    <import>genin2_macros.xml</import>
+
+
+
+    <requirements>
+        <requirement type=" package" version="2.1.2">genin2</requirement>
+    </requirements>
+
+    
+    <command detect_errors="exit_code"><![CDATA[
+    TODO: Fill in command template.
+    ]]></command>
+    <inputs>
+    </inputs>
+    <outputs>
+    </outputs>
+    <help><![CDATA[
+    TODO: Fill in help.
+    ]]></help>
+</tool>

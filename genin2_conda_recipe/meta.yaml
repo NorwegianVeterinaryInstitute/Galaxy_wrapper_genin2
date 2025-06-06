@@ -1,12 +1,14 @@
 {% set name = "genin2" %}
 {% set version = "2.1.2" %}
+{% set sha256 = "428952edbad1686c4995b01cd0093d5f712f6d45edbf3e70b49c33b0a17c9c26" %}
+
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 428952edbad1686c4995b01cd0093d5f712f6d45edbf3e70b49c33b0a17c9c26
+  sha256: {{ sha256 }}
 
 build:
   number: 0
@@ -53,10 +55,6 @@ about:
   home: https://github.com/izsvenezie-virology/genin2
   license: GNU Affero General Public License v3.0
   license_file: LICENSE # The sdist from PyPI includes this file
-  summary: 'GenInI: GENbank INput INIhibitor for an easy and standardized submission of FASTA and metadata to GISAID and GenBank'
+  summary: 'Genin2 is a lightining-fast bioinformatic tool to predict genotypes for clade 2.3.4.4b H5Nx viruses collected in Europe since October 2020.Genin2 identifies only epidemiologically relevant European genotypes, i.e., detected in at least 3 viruses collected from at least 2 countries.'
   doc_url: https://github.com/izsvenezie-virology/genin2
   dev_url: https://github.com/izsvenezie-virology/genin2
-
-extra:
-  recipe-maintainers:
-    - evezeyl

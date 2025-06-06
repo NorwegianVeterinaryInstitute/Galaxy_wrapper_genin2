@@ -6,6 +6,7 @@
 test
 *.fasta
 *.tar.gz 
+galaxy_toolshed_env
 
 # User-specific files
 *.rsuser
