@@ -9,28 +9,127 @@
                 <xref type="bio.tools">genin2</xref>
             </xrefs>
         </xml>
+
+        <!--FIXME did not set any macro in bio_tools so ... -->
+        <import>genin2_macros.xml</import>
+
     
         <token name="@TOOL_VERSION@">2.1.2</token>
         <token name="@VERSION_SUFFIX@">1</token>
+
+        <token name="@INPUT@">
+            <param name="input_file" type="data" format="fasta" label="Select input file" help="Virus genome. Headers must have been parsed. See genin2 manual."/>
+        </token>
+
+        <!-- FIXME 
+        will need to check that this works
+        -->
+        <xml name="min_seq_cov_conditional">
+            <conditional name="min_cov_cond">
+                <!-- This 'select' parameter is the controller for our conditional logic -->
+                <param name="specify_cov" type="select" label="Specify minimum sequence coverage?" help="The minimum accepted sequence coverage for each gene segment. Range: 0.0 to 1.0. Default: 0.7. Choose 'Yes' to override it.">
+                    <option value="no" selected="true">No, use the tool's internal default of 0.7</option>
+                    <option value="yes">Yes, specify a coverage value. Range 0.0 to 1.0.</option>
+                </param>
+                
+
+                <when value="yes">
+                    <param argument="--min-seq-cov" name="min_seq_cov" type="float" label="Minimum sequence coverage" 
+                    help="The minimum accepted sequence coverage for each gene segment. Range: 0.0 to 1.0." value="0.7" min="0.0" max="1.0" />
+                </when>
+                <when value="no">
+                </when>
+            </conditional>
+        </xml>
+
     </macros>
 
-    <import>genin2_macros.xml</import>
-
-
-
     <requirements>
-        <requirement type=" package" version="2.1.2">genin2</requirement>
+        <requirement type="package" version="@TOOL_VERSION@">genin2</requirement>
     </requirements>
 
-    
+
     <command detect_errors="exit_code"><![CDATA[
-    TODO: Fill in command template.
-    ]]></command>
+        #if str($min_cov_cond.specify_cov) == 'yes':
+            genin2 -o '$output_file' --min-seq-cov $min_seq_cov '$input_file'
+        #else:
+            genin2 -o '$output_file' '$input_file'
+        #end if
+        
+    ]]>
+    </command>
+
     <inputs>
+        <expand macro="INPUT"/>
+        <expand macro="min_seq_cov_conditional"/>
     </inputs>
+
+    <!-- FIXME I did not implement the log levels - should we ? -->
+    
     <outputs>
+      <data name="output_file" format="tabular"  label="\${tool.name} on \${on_string}" />
+      <!-- FIXME not sure you want the workdir from_work_dir="genin2_results.tsv" -->
     </outputs>
+
+    <tests>
+        <test expect_num_outputs="1">
+            <param name="input_file" value="test_input.txt"/>
+            <param name="some_flag" value="false"/>
+            <output name="output_file" file="test_output.txt" />
+        </test>
+        <test expect_num_outputs="1">
+            <param name="input_file" value="test_input.txt"/>
+            <param name="some_flag" value="true"/>
+            <output name="output_file" file="test_output_flag.txt" />
+        </test>
+    </tests>
+    
+    
     <help><![CDATA[
-    TODO: Fill in help.
+        Genin2 predicts genotypes for Influenza viruses beloning to the clade 2.3.4.4b H5Nx. 
+        For viruses collected in Europe since October 2020.
+
+        You have the option to override the tool's built-in minimum sequence coverage.
+        
+        If you choose **Yes**, you can provide a value, and the command will include the `--min-seq-cov` flag.
+        If you choose **No**, the flag is omitted, and the software uses its own internal default: 0.7.
+
+
+        This software is developped by the EURL.
+        <!-- FIXME
+        Genin2 Repostiory <https://github.com/izsvenezie-virology/genin2>
+
+        Citation: 
+        Fusaro, Alice, Bianca Zecchin, Edoardo Giussani, Elisa Palumbo, Montserrat Agüero-García, Claudia Bachofen, Ádám Bálint, et al. ‘High Pathogenic Avian Influenza A(H5) Viruses of Clade 2.3.4.4b in Europe—Why Trends of Virus Evolution Are More Difficult to Predict’. Virus Evolution 10, no. 1 (17 October 2024): veae027. https://doi.org/10.1093/ve/veae027.
+
     ]]></help>
+
+    <citations>
+        <citation type="bibtex">
+            @article{10.1093/ve/veae027,
+            author = {Fusaro, Alice and Zecchin, Bianca and Giussani, Edoardo and Palumbo, Elisa and Agüero-García, Montserrat and Bachofen, Claudia and Bálint, Ádám and Banihashem, Fereshteh and Banyard, Ashley C and Beerens, Nancy and Bourg, Manon and Briand, Francois-Xavier and Bröjer, Caroline and Brown, Ian H and Brugger, Brigitte and Byrne, Alexander M P and Cana, Armend and Christodoulou, Vasiliki and Dirbakova, Zuzana and Fagulha, Teresa and Fouchier, Ron A M and Garza-Cuartero, Laura and Georgiades, George and Gjerset, Britt and Grasland, Beatrice and Groza, Oxana and Harder, Timm and Henriques, Ana Margarida and Hjulsager, Charlotte Kristiane and Ivanova, Emiliya and Janeliunas, Zygimantas and Krivko, Laura and Lemon, Ken and Liang, Yuan and Lika, Aldin and Malik, Péter and McMenamy, Michael J and Nagy, Alexander and Nurmoja, Imbi and Onita, Iuliana and Pohlmann, Anne and Revilla-Fernández, Sandra and Sánchez-Sánchez, Azucena and Savic, Vladimir and Slavec, Brigita and Smietanka, Krzysztof and Snoeck, Chantal J and Steensels, Mieke and Svansson, Vilhjálmur and Swieton, Edyta and Tammiranta, Niina and Tinak, Martin and Van Borm, Steven and Zohari, Siamak and Adlhoch, Cornelia and Baldinelli, Francesca and Terregino, Calogero and Monne, Isabella},
+            title = {High pathogenic avian influenza A(H5) viruses of clade 2.3.4.4b in Europe—Why trends of virus evolution are more difficult to predict},
+            journal = {Virus Evolution},
+            volume = {10},
+            number = {1},
+            pages = {veae027},
+            year = {2024},
+            month = {04},
+            abstract = {Since 2016, A(H5Nx) high pathogenic avian influenza (HPAI) virus of clade 2.3.4.4b has become one of the most serious global threats not only to wild and domestic birds, but also to public health. In recent years, important changes in the ecology, epidemiology, and evolution of this virus have been reported, with an unprecedented global diffusion and variety of affected birds and mammalian species. After the two consecutive and devastating epidemic waves in Europe in 2020–2021 and 2021–2022, with the second one recognized as one of the largest epidemics recorded so far, this clade has begun to circulate endemically in European wild bird populations. This study used the complete genomes of 1,956 European HPAI A(H5Nx) viruses to investigate the virus evolution during this varying epidemiological outline. We investigated the spatiotemporal patterns of A(H5Nx) virus diffusion to/from and within Europe during the 2020–2021 and 2021–2022 epidemic waves, providing evidence of ongoing changes in transmission dynamics and disease epidemiology. We demonstrated the high genetic diversity of the circulating viruses, which have undergone frequent reassortment events, providing for the first time a complete overview and a proposed nomenclature of the multiple genotypes circulating in Europe in 2020–2022. We described the emergence of a new genotype with gull adapted genes, which offered the virus the opportunity to occupy new ecological niches, driving the disease endemicity in the European wild bird population. The high propensity of the virus for reassortment, its jumps to a progressively wider number of host species, including mammals, and the rapid acquisition of adaptive mutations make the trend of virus evolution and spread difficult to predict in this unfailing evolving scenario.},
+            issn = {2057-1577},
+            doi = {10.1093/ve/veae027},
+            url = {https://doi.org/10.1093/ve/veae027},
+            eprint = {https://academic.oup.com/ve/article-pdf/10/1/veae027/57605124/veae027.pdf},
+        }
+        </citation>
+        <citation type="bibtex">
+            @misc{genin2_repository, publisher = {GitHub}, journal = {GitHub repository},
+            howpublished = {\url{https://github.com/izsvenezie-virology/genin2}},
+            }
+        </citation>
+    </citations>
+
 </tool>
+
+
+
