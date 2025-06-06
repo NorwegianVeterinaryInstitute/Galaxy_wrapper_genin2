@@ -9,7 +9,10 @@
             </xrefs>
         </xml>
 
-        <!--FIXME did not set any macro in bio_tools so ... -->
+        <tag>
+            <subtag>FIXME did not set any macro in bio_tools so ... </subtag>
+        </tag>
+
         <import>genin2_macros.xml</import>
 
     
@@ -20,9 +23,11 @@
             <param name="input_file" type="data" format="fasta" label="Select input file" help="Virus genome. Headers must have been parsed. See genin2 manual."/>
         </token>
 
-        <!-- FIXME 
-        will need to check that this works
-        -->
+        <tag>
+            <subtag> FIXME will need to check that this works ... </subtag>
+        </tag>
+
+        
         <xml name="min_seq_cov_conditional">
             <conditional name="min_cov_cond">
                 <!-- This 'select' parameter is the controller for our conditional logic -->
@@ -63,11 +68,20 @@
         <expand macro="min_seq_cov_conditional"/>
     </inputs>
 
-    <!-- FIXME I did not implement the log levels - should we ? -->
+    <tag>
+        <subtag> FIXME I did not implement the log levels - should we ?</subtag>
+    </tag>
+
+
+
     
     <outputs>
       <data name="output_file" format="tabular" label="\${tool.name} on \${on_string}" />
-      <!-- FIXME not sure you want the workdir from_work_dir="genin2_results.tsv" -->
+
+    <tag>
+        <subtag> FIXME not sure you want the workdir from_work_dir="genin2_results.tsv" </subtag>
+    </tag>
+
     </outputs>
 
     <tests>
