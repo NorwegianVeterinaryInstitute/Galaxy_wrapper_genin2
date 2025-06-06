@@ -58,3 +58,7 @@ about:
   summary: 'Genin2 is a lightining-fast bioinformatic tool to predict genotypes for clade 2.3.4.4b H5Nx viruses collected in Europe since October 2020.Genin2 identifies only epidemiologically relevant European genotypes, i.e., detected in at least 3 viruses collected from at least 2 countries.'
   doc_url: https://github.com/izsvenezie-virology/genin2
   dev_url: https://github.com/izsvenezie-virology/genin2
+
+extra:
+  recipe-maintainers:
+    - evezeyl
